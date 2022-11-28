@@ -17,7 +17,7 @@ const checkbox2 = document.getElementById('checkbox2');
 const enable = document.querySelectorAll('.enable');
 const heroSection = document.getElementsByClassName('hero-section');
 const topNavbar = document.getElementById('myTopnav');
- 
+
 var lastnameCtrl = false;
 var firstnameCtrl = false;
 var emailCtrl = false;
@@ -40,7 +40,7 @@ function editNav() {
 }
 // launch modal
 function launchModal(topNavbar) {
-  if(window.innerWidth >= 800) {
+  if (window.innerWidth >= 800) {
     // topNavbar.classList.add('none');
     // heroSection.classList.add('none');
     modalbg.style.display = "block";
@@ -186,25 +186,25 @@ quantity.addEventListener('input', function (e) {
 // Vérifie qu'une ville est bien selectionnée'.
 radioButtons.forEach(radiobutton => {
   radiobutton.addEventListener('click', function handleClick(e) {
-    if(e.target.value !="" && e.target.value != null) {
+    if (e.target.value != "" && e.target.value != null) {
       cityCtrl = !!true
       enable[5].classList.replace('enable', 'disable');
 
-    }else {
+    } else {
       cityCtrl = !!false
       console.log('Veuillez sélectionner une ville')
 
     }
   })
 });
- 
+
 
 
 
 
 // radioButtons.forEach(radioButtons => radioButtons.addEventListener('change', function (e) {
 //   for (i = 0; i > radioButtons.length; i++) {
-    
+
 //       if (radioButtons.checked) {
 //         console.log('une ville est sélectionnée');
 //       } else {
