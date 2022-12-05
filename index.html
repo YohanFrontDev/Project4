@@ -11,12 +11,11 @@
 </head>
 
 <body>
-  <div class="topnav display" id="myTopnav">
+  <nav class="topnav display" id="myTopnav">
     <div class="header-logo">
       <img alt="logo" src="Logo.png" />
     </div>
     <div class="main-navbar">
-
       <a href="#" class="active"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
@@ -25,7 +24,7 @@
         <i class="fa fa-bars"></i>
       </a>
     </div>
-  </div>
+  </nav>
   <main>
     <div class="hero-section">
       <div class="hero-content">
@@ -53,31 +52,31 @@
       <div class="content">
         <span class="close" onclick="closeModal()"></span>
         <div class="modal-body">
-          <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+          <form name="reserve" action="index.html" method="get">
             <div class="formData">
-              <label>Prénom</label><br>
-              <input class="text-control border" type="text" id="first" name="first" minlength="2" required /><br>
-              <span class="enable">Le champ Prénom nécessite au minimum 2 caractères.</span>
+              <label for="first">Prénom</label><br>
+              <input class="text-control noBorder" type="text" id="first" name="first" minlength="2" required /><br>
+              <span class="disable">Le champ Prénom nécessite au minimum 2 caractères.</span>
             </div>
             <div class="formData">
-              <label>Nom</label><br>
-              <input class="text-control border" type="text" id="last" name="last" /><br>
-              <span class="enable">Le champ Nom nécessite au minimum de 2 caractères.</span>
+              <label for="last">Nom</label><br>
+              <input class="text-control noBorder" type="text" id="last" name="last" /><br>
+              <span class="disable">Le champ Nom nécessite au minimum de 2 caractères.</span>
             </div>
             <div class="formData">
-              <label>E-mail</label><br>
-              <input class="text-control border" type="email" id="email" name="email" /><br>
-              <span class="enable">L'adresse électronique n'est pas valide.</span>
+              <label for="email">E-mail</label><br>
+              <input class="text-control noBorder" type="email" id="email" name="email" /><br>
+              <span class="disable">L'adresse électronique n'est pas valide.</span>
             </div>
             <div class="formData">
-              <label>Date de naissance</label><br>
-              <input class="text-control border" type="date" id="birthdate" name="birthdate" /><br>
-              <span class="enable">Veuillez saisir votre date de naissance</span>
+              <label for="birthdate">Date de naissance</label><br>
+              <input class="text-control noBorder" type="date" id="birthdate" name="birthdate" /><br>
+              <span class="disable">Veuillez saisir votre date de naissance</span>
             </div>
             <div class="formData">
-              <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-              <input type="number" class="text-control border" id="quantity" name="quantity" min="0" max="99">
-              <span class="enable">Veuillez indiquer un nombre entre 0 et 99.</span>
+              <label for="quantity" >À combien de tournois GameOn avez-vous déjà participé ?</label><br>
+              <input type="number" class="text-control noBorder" id="quantity" name="quantity" min="0" max="99">
+              <span class="disable">Veuillez indiquer un nombre entre 0 et 99.</span>
             </div>
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
             <div class="formData">
@@ -105,23 +104,23 @@
               <label class="checkbox-label" for="location6">
                 <span class="checkbox-icon"></span>
                 Portland</label><br>
-              <span class="enable">Veuillez sélectionner une ville.</span>
+              <span class="disable">Veuillez sélectionner une ville.</span>
             </div>
 
             <div class="formData">
               <input class="checkbox-input" type="checkbox" id="checkbox1" />
-              <label class="checkbox2-label" for="checkbox1" required>
+              <label class="checkbox2-label" for="checkbox1">
                 <span class="checkbox-icon border"></span>
                 J'ai lu et accepté les conditions d'utilisation.
               </label>
               <br>
+              <span class="disable">Vous devez accepter les conditions d'utilisation.</span>
               <input class="checkbox-input" type="checkbox" id="checkbox2" />
               <label class="checkbox2-label" for="checkbox2">
                 <span class="checkbox-icon"></span>
                 Je souhaite être prévenu des prochains évènements.
               </label>
               <br>
-              <span class="enable">Vous devez accepter les conditions d'utilisation.</span>
             </div>
             <input class="btn-submit button" value="C'est parti" onclick="validate()" />
           </form>

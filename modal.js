@@ -5,6 +5,7 @@ const modalEnd = document.getElementsByClassName("close");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const validModalBtn = document.getElementById("btn-submit");
 const formData = document.querySelectorAll(".formData");
+const formElement = document.querySelector("form[name=reserve]");
 const formIsValid = false;
 const firstname = document.getElementById('first');
 const lastname = document.getElementById('last');
@@ -14,7 +15,7 @@ const quantity = document.getElementById('quantity');
 const radioButtons = document.querySelectorAll('input[type="radio"]');
 const checkbox1 = document.getElementById('checkbox1');
 const checkbox2 = document.getElementById('checkbox2');
-const enable = document.querySelectorAll('.enable');
+const disable = document.querySelectorAll('.disable');
 const heroSection = document.getElementsByClassName('hero-section');
 const topNavbar = document.getElementById('myTopnav');
 
@@ -26,9 +27,6 @@ var quantityCtrl = false;
 var cityCtrl = false;
 var radioButtonsCtrl = false;
 var checkbox1Ctrl = false;
-
-
-
 
 // Permet l'affichage d'un burger ou des boutons natifs
 function editNav() {
@@ -60,9 +58,13 @@ function launchValidModal(formIsValid) {
   if (formIsValid = true) {
     closeModal();
     modalbgValid.style.display = "block";
+    initValueForm();
   } else {
     alert("Veuillez remplir le formulaire correctement");
   }
+}
+function initValueForm() {
+  formElement.reset();
 }
 
 //close second modal
@@ -78,25 +80,25 @@ firstname.addEventListener('input', function (e) {
 
   if (firstname.value.length >= 2) {
 
-    if (firstname.classList.contains('border') && enable[0].classList.contains('enable')) {
+    if (firstname.classList.contains('border') && disable[0].classList.contains('enable')) {
       firstname.classList.replace('border', 'noBorder');
-      enable[0].classList.replace('enable', 'disable')
+      disable[0].classList.replace('enable', 'disable')
       firstnameCtrl = !!true;
 
     } else {
       firstname.classList.add('noBorder');
-      enable[0].classList.replace('enable', 'disable');
+      disable[0].classList.replace('enable', 'disable');
       firstnameCtrl = !!true;
     }
   } else if (firstname.value.length < 2) {
-    if (firstname.classList.contains('noBorder') || enable[0].classList.contains('enable')) {
+    if (firstname.classList.contains('noBorder') || disable[0].classList.contains('enable')) {
       firstname.classList.replace('noBorder', 'border');
-      enable[0].classList.replace('disable', 'enable')
+      disable[0].classList.replace('disable', 'enable')
       firstnameCtrl = !!false;
 
     } else {
       firstname.classList.add('noBorder');
-      enable[0].classList.replace('enable', 'disable');
+      disable[0].classList.replace('enable', 'disable');
       firstnameCtrl = !!true;
     }
   }
@@ -107,28 +109,28 @@ lastname.addEventListener('input', function (e) {
 
   if (lastname.value.length >= 2) {
 
-    if (lastname.classList.contains('border') && enable[1].classList.contains('enable')) {
+    if (lastname.classList.contains('border') && disable[1].classList.contains('enable')) {
       lastname.classList.replace('border', 'noBorder');
-      enable[1].classList.replace('enable', 'disable');
+      disable[1].classList.replace('enable', 'disable');
       lastnameCtrl = !!true
       console.log(lastnameCtrl)
     } else {
       lastname.classList.add('noBorder');
-      enable[1].classList.replace('enable', 'disable');
+      disable[1].classList.replace('enable', 'disable');
       lastnameCtrl = !!true
       console.log(lastnameCtrl)
 
     }
   } else if (lastname.value.length < 2) {
-    if (lastname.classList.contains('noBorder') || enable[1].classList.contains('enable')) {
+    if (lastname.classList.contains('noBorder') || disable[1].classList.contains('enable')) {
       lastname.classList.replace('noBorder', 'border');
-      enable[1].classList.replace('disable', 'enable')
+      disable[1].classList.replace('disable', 'enable')
       lastnameCtrl = !!false
       console.log(lastnameCtrl)
 
     } else {
       lastname.classList.add('noBorder');
-      enable[1].classList.replace('enable', 'disable');
+      disable[1].classList.replace('enable', 'disable');
       lastnameCtrl = !!true
       console.log(lastnameCtrl)
 
@@ -142,12 +144,12 @@ email.addEventListener('input', function (e) {
   // format recquis : lettre(s) + @ + lettre(s) + . + 2 ou 3 lettres.  
   const regExEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (email.value.match(regExEmail)) {
-    enable[2].classList.replace('enable', 'disable');
+    disable[2].classList.replace('enable', 'disable');
     email.classList.replace('border', 'noBorder');
     emailCtrl = !!true;
 
   } else if (email.value.length >= 0 && email.classList.contains('noBorder')) {
-    enable[2].classList.replace('disable', 'enable');
+    disable[2].classList.replace('disable', 'enable');
     email.classList.replace('noBorder', 'border');
     emailCtrl = !!false;
   }
@@ -156,12 +158,12 @@ email.addEventListener('input', function (e) {
 //vérifie que la date est saisie (minlength : 10)
 birthdate.addEventListener('input', function (e) {
   if (birthdate.value.length > 9) {
-    enable[3].classList.replace('enable', 'disable');
+    disable[3].classList.replace('enable', 'disable');
     birthdate.classList.replace('border', 'noBorder');
     birthdateCtrl = !!true;
 
   } else {
-    enable[3].classList.replace('disable', 'enable');
+    disable[3].classList.replace('disable', 'enable');
     birthdate.classList.replace('noBorder', 'border');
     birthdateCtrl = !!false;
   }
@@ -171,12 +173,12 @@ birthdate.addEventListener('input', function (e) {
 quantity.addEventListener('input', function (e) {
   const numbers = /^[0-9]+$/;
   if (quantity.value.match(numbers) && quantity.value.length < 3 && quantity.value !== "") {
-    enable[4].classList.replace('enable', 'disable');
+    disable[4].classList.replace('enable', 'disable');
     quantity.classList.replace('border', 'noBorder');
     quantityCtrl = !!true;
 
   } else {
-    enable[4].classList.replace('disable', 'enable');
+    disable[4].classList.replace('disable', 'enable');
     quantity.classList.replace('noBorder', 'border');
     quantityCtrl = !!false
 
@@ -188,7 +190,7 @@ radioButtons.forEach(radiobutton => {
   radiobutton.addEventListener('click', function handleClick(e) {
     if (e.target.value != "" && e.target.value != null) {
       cityCtrl = !!true
-      enable[5].classList.replace('enable', 'disable');
+      disable[5].classList.replace('enable', 'disable');
 
     } else {
       cityCtrl = !!false
@@ -217,21 +219,21 @@ radioButtons.forEach(radiobutton => {
 //Vérifie que les conditions d'utilisation sont acceptées.
 checkbox1.addEventListener('change', function (e) {
   if (checkbox1.checked) {
-    if (checkbox1.checked && enable[6].classList.contains('enable')) {
-      enable[6].classList.replace('enable', 'disable');
+    if (checkbox1.checked && disable[6].classList.contains('enable')) {
+      disable[6].classList.replace('enable', 'disable');
       checkbox1Ctrl = !!true;
 
     } else {
-      enable[6].classList.add('disable');
+      disable[6].classList.add('disable');
       checkbox1Ctrl = !!true;
     }
   } else {
-    if (enable[6].classList.contains('disable')) {
-      enable[6].classList.replace('disable', 'enable');
+    if (disable[6].classList.contains('disable')) {
+      disable[6].classList.replace('disable', 'enable');
       checkbox1Ctrl = !!false;
 
     } else {
-      enable[6].classList.add('enable');
+      disable[6].classList.add('enable');
       checkbox1Ctrl = !!false;
     }
   }

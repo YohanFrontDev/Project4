@@ -19,7 +19,6 @@ body {
   font-size: 18px;
   max-width: 1080px;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 p {
@@ -115,7 +114,6 @@ main {
   padding-right: 2vw;
   margin: 1px 20px 15px;
   border-radius: 2rem;
-  text-align: justify;
   align-items: center;
 }
 
@@ -202,6 +200,7 @@ main {
   color: #fe142f;
   font-size: 15px;
   font-weight: 400;
+  text-align: left;
 }
 
 .disable {
@@ -740,6 +739,7 @@ footer {
     margin-top: 80px;
     width: 12.5rem;
   }
+
   .modal-btn {
     width: 150px;
     background: #fe142f;
@@ -749,6 +749,7 @@ footer {
     border-radius: 10px;
     cursor: pointer;
   }
+
   .hero-content {
     padding: 51px 67px;
     grid-column: span 4;
