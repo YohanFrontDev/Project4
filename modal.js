@@ -51,6 +51,7 @@ function launchModal(topNavbar) {
 //close modal (cross btn)
 function closeModal() {
   modalbg.style.display = "none";
+  initValueForm();
 }
 
 // launch second modal 
@@ -70,6 +71,7 @@ function initValueForm() {
 //close second modal
 function closeValidModal() {
   modalbgValid.style.display = "none";
+  initValueForm();
 }
 // Vérifie que mon champ prénom contient au moins 2 lettres et n'est pas vide.
 
