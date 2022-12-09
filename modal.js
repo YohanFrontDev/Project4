@@ -6,7 +6,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const validModalBtn = document.getElementById("btn-submit");
 const formData = document.querySelectorAll(".formData");
 const formElement = document.querySelector("form[name=reserve]");
-const formIsValid = false;
 const firstname = document.getElementById('first');
 const lastname = document.getElementById('last');
 const email = document.getElementById('email');
@@ -18,7 +17,9 @@ const checkbox2 = document.getElementById('checkbox2');
 const disable = document.querySelectorAll('.disable');
 const heroSection = document.getElementsByClassName('hero-section');
 const topNavbar = document.getElementById('myTopnav');
+const buttonValid = document.getElementById('buttonValid')
 
+let formIsValid = false;
 var lastnameCtrl = false;
 var firstnameCtrl = false;
 var emailCtrl = false;
@@ -44,37 +45,52 @@ function launchModal(topNavbar) {
     modalbg.style.display = "block";
   } else {
     modalbg.style.display = "block";
-
   }
 }
 
 //close modal (cross btn)
 function closeModal() {
-  modalbg.style.display = "none";
-  initValueForm();
+  if (allFieldsAreValid()) {
+    modalbg.style.display = "none";
+    document.getElementById('myForm').reset();
+  } else {
+    modalbg.style.display = "none";
+  }
+}
+
+// check form is valid
+function validate() {
+  if (!allFieldsAreValid()) {
+    console.log('le formulaire est mal remplit')
+    firstnameChecking()
+  } else {
+    console.log('le formulaire est soumit')
+    launchValidModal();
+  }
 }
 
 // launch second modal 
-function launchValidModal(formIsValid) {
-  if (formIsValid = true) {
-    closeModal();
-    modalbgValid.style.display = "block";
-    initValueForm();
-  } else {
-    alert("Veuillez remplir le formulaire correctement");
-  }
-}
-function initValueForm() {
-  formElement.reset();
+function launchValidModal() {
+  modalbgValid.style.display = "block";
+  closeModal();
 }
 
 //close second modal
 function closeValidModal() {
   modalbgValid.style.display = "none";
-  initValueForm();
+  document.getElementById('myForm').reset();
 }
-// Vérifie que mon champ prénom contient au moins 2 lettres et n'est pas vide.
 
+function allFieldsAreValid(firstnameCtrl, lastnameCtrl, emailCtrl, birthdateCtrl, quantityCtrl, cityCtrl, checkbox1Ctrl) {
+  firstnameChecking();
+  if (this.firstnameCtrl && this.lastnameCtrl && this.emailCtrl && this.birthdateCtrl && this.quantityCtrl && this.cityCtrl && this.checkbox1Ctrl) {
+    console.log('les champs sont bien remplit')
+    return true;
+  } else {
+    console.log('Veuillez vérifier les champs à remplir')
+    return false;
+  }
+}
 
 
 //mets à jour le champ/message d'erreur lorsque les prérecquis ne sont pas respectés
@@ -105,6 +121,95 @@ firstname.addEventListener('input', function (e) {
     }
   }
 })
+
+function firstnameChecking() {
+
+  if (firstname.value.length == 0) {
+    firstname.classList.replace('noBorder', 'border');
+    disable[0].classList.replace('disable', 'enable');
+    firstnameCtrl = !!false;
+    lastnameChecking();
+  } else {
+    lastnameChecking();
+  }
+}
+function lastnameChecking() {
+
+  if (lastname.value.length == 0) {
+    lastname.classList.replace('noBorder', 'border');
+    disable[1].classList.replace('disable', 'enable');
+    lastnameCtrl = !!false;
+    emailChecking();
+  } else {
+    emailChecking();
+  }
+}
+function emailChecking() {
+
+  if (email.value.length == 0) {
+    disable[2].classList.replace('disable', 'enable');
+    email.classList.replace('noBorder', 'border');
+    emailCtrl = !!false;
+    birthdateChecking();
+  } else {
+    birthdateChecking();
+  }
+}
+function birthdateChecking() {
+
+  if (birthdate.value.length == 0) {
+    disable[3].classList.replace('disable', 'enable');
+    birthdate.classList.replace('noBorder', 'border');
+    birthdateCtrl = !!false;
+    quantityChecking();
+  } else {
+    console.log('très bien')
+    quantityChecking();
+  }
+}
+function quantityChecking() {
+
+  if (quantity.value.length == 0) {
+    disable[4].classList.replace('disable', 'enable');
+    quantity.classList.replace('noBorder', 'border');
+    quantityCtrl = !!false;
+    checkboxChecking();
+  } else {
+    checkboxChecking();
+    console.log('très bien')
+  }
+}
+function checkboxChecking() {
+
+  if (checkbox1.checked == false) {
+    disable[6].classList.replace('disable', 'enable');
+    checkbox1Ctrl = !!false;
+    radioChecking();
+
+  } else {
+
+    console.log('très bien')
+    radioChecking();
+  }
+}
+function radioChecking() {
+
+  let buttonChecked = false;
+
+  for (var button of radioButtons) {
+    if (button.checked === true) {
+      buttonChecked = true
+
+    } else {
+      disable[5].classList.replace('disable', 'enable');
+    }
+  }
+  if (buttonChecked === true) {
+    disable[5].classList.replace('enable', 'disable');
+    cityCtrl = !!true;
+
+  }
+}
 
 // Vérifie que mon champ nom contient au moins 2 lettres et n'est pas vide.
 lastname.addEventListener('input', function (e) {
@@ -195,31 +300,17 @@ radioButtons.forEach(radiobutton => {
       disable[5].classList.replace('enable', 'disable');
 
     } else {
+      disable[5].classList.replace('disable', 'enable');
       cityCtrl = !!false
+
       console.log('Veuillez sélectionner une ville')
 
     }
   })
 });
 
-
-
-
-
-// radioButtons.forEach(radioButtons => radioButtons.addEventListener('change', function (e) {
-//   for (i = 0; i > radioButtons.length; i++) {
-
-//       if (radioButtons.checked) {
-//         console.log('une ville est sélectionnée');
-//       } else {
-//         console.log('echec')
-//       }
-//     }
-//   }
-// ))
-
 //Vérifie que les conditions d'utilisation sont acceptées.
-checkbox1.addEventListener('change', function (e) {
+checkbox1.addEventListener('change', function checkboxEvent() {
   if (checkbox1.checked) {
     if (checkbox1.checked && disable[6].classList.contains('enable')) {
       disable[6].classList.replace('enable', 'disable');
@@ -240,76 +331,3 @@ checkbox1.addEventListener('change', function (e) {
     }
   }
 })
-
-function allFieldsAreValid(firstnameCtrl, lastnameCtrl, emailCtrl, birthdateCtrl, quantityCtrl, cityCtrl, checkbox1Ctrl) {
-  if (this.firstnameCtrl && this.lastnameCtrl && this.emailCtrl && this.birthdateCtrl && this.quantityCtrl && this.cityCtrl && this.checkbox1Ctrl) {
-    console.log('les champs sont bien remplit')
-    return true;
-  } else {
-    console.log('Veuillez vérifier les champs à remplir')
-    return false;
-  }
-}
-
-// check form is valid
-function validate() {
-  if (!allFieldsAreValid()) {
-    alert('le formulaire est mal remplit')
-
-  } else {
-    console.log('le formulaire est soumit')
-    launchValidModal();
-  }
-}
-
-
-// Validation formulaire via un switch -> n'affiche les erreurs qu'au moment de l'envoie du formulaire.
-// for (const input in inputs) {
-//   switch (input) {
-//       case "firstname":
-//           if (!nameValidation(inputs[input].element, inputs[input].regex)) {
-//               valid = false;
-//           }
-//           break;
-
-//       case "lastname":
-//           if (!nameValidation(inputs[input].element, inputs[input].regex)) {
-//               valid = false;
-//           }
-//           break;
-
-//       case "email":
-//           if (!emailValidation(this.inputs[input].element, inputs[input].regex)) {
-//               valid = false;
-//           }
-//           break;
-
-//       case "birthdate":
-//           if (!birthdateValidation(this.inputs[input].element, inputs[input].regex)) {
-//               valid = false;
-//           }
-//           break;
-
-//       case "contest":
-//           if (!contestValidation(inputs[input].element, inputs[input].regex)) {
-//               valid = false;
-//           }
-//           break;
-
-//       case "location":
-//           if (!locationValidation(inputs[input].element)) {
-//               valid = false;
-//           }
-//           break;
-
-//       case "checkbox":
-//           if (!checkboxValidation(inputs[input].element)) {
-//               valid = false;
-//           }
-//           break;
-
-//       default :
-//           break;
-//   }
-// }
-// return this.valid;
